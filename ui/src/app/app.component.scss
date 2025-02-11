@@ -1,0 +1,6 @@
+main {
+  min-height: calc(
+    100vh - 64px
+  ); // 64px est la hauteur par défaut de mat-toolbar
+  padding: 20px;
+}

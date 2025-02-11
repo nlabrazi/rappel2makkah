@@ -1,0 +1,88 @@
+version: '3.8'
+
+services:
+  ui:
+    build:
+      context: ./ui
+      dockerfile: Dockerfile.dev
+      args:
+        USER_ID: ${UID:-1000}
+        GROUP_ID: ${GID:-1000}
+    environment:
+      - NODE_ENV=production
+      - NG_ENV=production
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./ui:/app
+      - ui_cache:/app/.angular/cache
+    depends_on:
+      - api
+    command: >
+      sh -c "npm install && ng serve --host 0.0.0.0 --proxy-config proxy.conf.json"
+    networks:
+      - app-network
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile.dev
+      args:
+        USER_ID: ${UID:-1000}
+        GROUP_ID: ${GID:-1000}
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./api:/app
+    depends_on:
+      - postgres
+    command: >
+      sh -c "rm -rf node_modules && npm install && npx prisma generate && npx prisma migrate deploy && npm run format && npm run lint || true && npm run start:dev"
+    networks:
+      - app-network
+
+  postgres:
+    image: postgres:14
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: rappel2makkah
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  prisma-studio:
+    build:
+      context: ./api
+      dockerfile: Dockerfile.dev
+      args:
+        USER_ID: ${UID:-1000}
+        GROUP_ID: ${GID:-1000}
+    ports:
+      - "5555:5555"
+    volumes:
+      - ./api:/app
+    depends_on:
+      postgres:
+        condition: service_healthy
+    entrypoint: >
+      sh -c "echo 'Waiting for PostgreSQL to be ready...' && sleep 5 && npx prisma studio --port 5555 --hostname 0.0.0.0"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/rappel2makkah?schema=public"
+    command: npx prisma studio --port 5555 --hostname 0.0.0.0
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres_data: {}
+  ui_cache: {}

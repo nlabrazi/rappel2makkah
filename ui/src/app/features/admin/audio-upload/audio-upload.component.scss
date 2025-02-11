@@ -1,0 +1,62 @@
+.upload-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.upload-zone {
+  border: 2px dashed #ccc;
+  border-radius: 4px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  margin-bottom: 2rem;
+
+  &.dragover {
+    border-color: #2196f3;
+    background-color: rgba(33, 150, 243, 0.05);
+  }
+
+  mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    margin-bottom: 1rem;
+    color: #666;
+  }
+}
+
+.files-list {
+  h3 {
+    margin-bottom: 1rem;
+  }
+
+  mat-list-item {
+    margin-bottom: 0.5rem;
+  }
+
+  .file-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    audio {
+      max-width: 200px;
+    }
+
+    mat-progress-bar {
+      width: 100px;
+    }
+  }
+}
+
+mat-card-actions {
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+}

@@ -1,0 +1,49 @@
+<mat-toolbar color="primary">
+  <div class="header-container">
+    <!-- Logo/Titre -->
+    <a routerLink="/" class="logo">
+      <span>Rappel2Makkah</span>
+    </a>
+
+    <!-- Navigation -->
+    <nav class="nav-links">
+      <a
+        mat-button
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <mat-icon>home</mat-icon>
+        Accueil
+      </a>
+      <a mat-button routerLink="/articles" routerLinkActive="active">
+        <mat-icon>article</mat-icon>
+        Articles
+      </a>
+      <a mat-button routerLink="/audios" routerLinkActive="active">
+        <mat-icon>headphones</mat-icon>
+        Audios
+      </a>
+    </nav>
+
+    <!-- Bouton Admin -->
+    <div class="admin-section">
+      <ng-container *ngIf="isAdmin$ | async; else loginButton">
+        <a mat-raised-button color="accent" routerLink="/admin">
+          <mat-icon>admin_panel_settings</mat-icon>
+          Espace Admin
+        </a>
+        <button mat-button (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          Déconnexion
+        </button>
+      </ng-container>
+      <ng-template #loginButton>
+        <a mat-button routerLink="/login">
+          <mat-icon>login</mat-icon>
+          Connexion
+        </a>
+      </ng-template>
+    </div>
+  </div>
+</mat-toolbar>

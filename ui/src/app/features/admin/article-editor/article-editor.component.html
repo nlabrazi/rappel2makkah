@@ -1,0 +1,106 @@
+<div class="editor-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{
+        isEditMode ? "Modifier l'article" : "Nouvel article"
+      }}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+          <mat-label>Titre de l'article</mat-label>
+          <input
+            matInput
+            formControlName="title"
+            placeholder="Entrez le titre"
+          />
+          <mat-error *ngIf="articleForm.get('title')?.hasError('required')">
+            Le titre est requis
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Extrait</mat-label>
+          <textarea
+            matInput
+            formControlName="excerpt"
+            rows="3"
+            placeholder="Bref résumé de l'article"
+          ></textarea>
+        </mat-form-field>
+
+        <div class="audio-upload">
+          <h3>Fichier audio</h3>
+          <input
+            type="file"
+            #audioFile
+            (change)="onAudioSelected($event)"
+            accept="audio/*"
+          />
+          <div class="current-audio" *ngIf="currentAudioUrl">
+            <audio controls>
+              <source [src]="currentAudioUrl" type="audio/mpeg" />
+            </audio>
+          </div>
+        </div>
+
+        <div class="editor-wrapper">
+          <mat-label>Contenu de l'article</mat-label>
+          <div class="editor-toolbar">
+            <button mat-icon-button type="button" (click)="formatText('bold')">
+              <mat-icon>format_bold</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              type="button"
+              (click)="formatText('italic')"
+            >
+              <mat-icon>format_italic</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              type="button"
+              (click)="formatText('underline')"
+            >
+              <mat-icon>format_underlined</mat-icon>
+            </button>
+            <span class="separator"></span>
+            <button
+              mat-icon-button
+              type="button"
+              (click)="insertList('bullet')"
+            >
+              <mat-icon>format_list_bulleted</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              type="button"
+              (click)="insertList('number')"
+            >
+              <mat-icon>format_list_numbered</mat-icon>
+            </button>
+          </div>
+          <textarea
+            matInput
+            formControlName="content"
+            rows="15"
+            placeholder="Écrivez votre article ici..."
+          ></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button mat-button type="button" (click)="cancel()">Annuler</button>
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="articleForm.invalid || submitting"
+          >
+            {{ isEditMode ? "Mettre à jour" : "Publier" }}
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

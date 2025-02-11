@@ -1,0 +1,61 @@
+.container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.main-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #2c3e50;
+}
+
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.article-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  mat-card-content {
+    flex-grow: 1;
+    padding: 1rem;
+  }
+}
+
+.audio-player {
+  padding: 1rem;
+
+  audio {
+    width: 100%;
+    margin-top: 1rem;
+  }
+}
+
+mat-card-actions {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .articles-grid {
+    grid-template-columns: 1fr;
+  }
+}
