@@ -1,7 +1,7 @@
-import { TestBed } from "@angular/core/testing";
-import { AudioService } from "./audio.service";
+import {TestBed} from '@angular/core/testing';
+import {AudioService} from './audio.service';
 
-describe("AudioService", () => {
+describe('AudioService', () => {
   let service: AudioService;
 
   beforeEach(() => {
@@ -9,7 +9,7 @@ describe("AudioService", () => {
     service = new AudioService();
   });
 
-  it("should be created", () => {
+  it('should be created', () => {
     expect(service).toBeTruthy();
   });
 });

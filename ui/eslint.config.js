@@ -1,43 +1,42 @@
 // @ts-check
-const eslint = require("@eslint/js");
-const tseslint = require("typescript-eslint");
-const angular = require("angular-eslint");
+const eslint = require('@eslint/js');
+const tseslint = require('typescript-eslint');
+const angular = require('angular-eslint');
 
-module.exports = tseslint.config(
-  {
-    files: ["**/*.ts"],
-    extends: [
-      eslint.configs.recommended,
-      ...tseslint.configs.recommended,
-      ...tseslint.configs.stylistic,
-      ...angular.configs.tsRecommended,
-    ],
-    processor: angular.processInlineTemplates,
-    rules: {
-      "@angular-eslint/directive-selector": [
-        "error",
-        {
-          type: "attribute",
-          prefix: "app",
-          style: "camelCase",
-        },
+module.exports = [
+  ...tseslint.config(
+    {
+      files: ['**/*.ts'],
+      extends: [
+        eslint.configs.recommended,
+        ...tseslint.configs.recommended,
+        ...tseslint.configs.stylistic,
+        ...angular.configs.tsRecommended
       ],
-      "@angular-eslint/component-selector": [
-        "error",
-        {
-          type: "element",
-          prefix: "app",
-          style: "kebab-case",
-        },
-      ],
+      processor: angular.processInlineTemplates,
+      rules: {
+        '@angular-eslint/directive-selector': [
+          'error',
+          {type: 'attribute', prefix: 'app', style: 'camelCase'}
+        ],
+        '@angular-eslint/component-selector': [
+          'error',
+          {type: 'element', prefix: 'app', style: 'kebab-case'}
+        ],
+        semi: ['error', 'always'],
+        quotes: ['error', 'single'],
+        indent: ['error', 2],
+        'object-curly-spacing': ['error', 'never'],
+        'comma-dangle': ['error', 'never']
+      }
     },
-  },
-  {
-    files: ["**/*.html"],
-    extends: [
-      ...angular.configs.templateRecommended,
-      ...angular.configs.templateAccessibility,
-    ],
-    rules: {},
-  }
-);
+    {
+      files: ['**/*.html'],
+      extends: [
+        ...angular.configs.templateRecommended,
+        ...angular.configs.templateAccessibility
+      ],
+      rules: {}
+    }
+  )
+];

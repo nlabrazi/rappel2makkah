@@ -15,11 +15,10 @@ services:
       - "4200:4200"
     volumes:
       - ./ui:/app
-      - ui_cache:/app/.angular/cache
     depends_on:
       - api
     command: >
-      sh -c "npm install && ng serve --host 0.0.0.0 --proxy-config proxy.conf.json"
+      sh -c "rm -rf node_modules && npm install && npm run format && npm run lint || true && ng serve --host 0.0.0.0 --proxy-config proxy.conf.json"
     networks:
       - app-network
 

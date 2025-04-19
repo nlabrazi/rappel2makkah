@@ -1,7 +1,7 @@
-import { TestBed } from "@angular/core/testing";
-import { ArticleService } from "./article.service";
+import {TestBed} from '@angular/core/testing';
+import {ArticleService} from './article.service';
 
-describe("ArticleService", () => {
+describe('ArticleService', () => {
   let service: ArticleService;
 
   beforeEach(() => {
@@ -9,7 +9,7 @@ describe("ArticleService", () => {
     service = new ArticleService();
   });
 
-  it("should be created", () => {
+  it('should be created', () => {
     expect(service).toBeTruthy();
   });
 });

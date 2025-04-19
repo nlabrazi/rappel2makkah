@@ -8,10 +8,10 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { ArticlesService } from './articles.service';
-import { CreateArticleDto } from './dto/create-article.dto';
-import { UpdateArticleDto } from './dto/update-article.dto';
+import {JwtAuthGuard} from '../auth/guards/jwt-auth.guard';
+import {ArticlesService} from './articles.service';
+import {CreateArticleDto} from './dto/create-article.dto';
+import {UpdateArticleDto} from './dto/update-article.dto';
 
 @Controller('articles')
 export class ArticlesController {

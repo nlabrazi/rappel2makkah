@@ -2,35 +2,34 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-# Installer Angular CLI globalement
+# Installer Angular CLI + Prettier + ESLint globalement
 RUN npm install -g @angular/cli prettier eslint
 
-# Ajout des arguments pour les UID et GID
+# Ajout des arguments UID/GID
 ARG USER_ID=1000
 ARG GROUP_ID=1000
 
-# Création d’un utilisateur non-root
+# Créer un utilisateur non-root
 RUN deluser --remove-home node \
   && addgroup -g $GROUP_ID nodeuser \
   && adduser -u $USER_ID -G nodeuser -s /bin/sh -D nodeuser
 
-# Passer temporairement en root pour copier les fichiers
+# Passer temporairement en root
 USER root
 
-# Copier package.json AVANT d'installer les dépendances
+# Copier package.json + lock en premier pour le cache
 COPY package.json package-lock.json ./
 
-# Corriger les permissions pour nodeuser
+# Donner les bons droits
 RUN chown -R nodeuser:nodeuser /app
 
-# Passer à l'utilisateur non-root
+# Revenir à l’utilisateur nodeuser
 USER nodeuser
 
-# Installation des dépendances
+# Installer les dépendances (sera écrasé ensuite par volume mais nécessaire au build)
 RUN npm install
 
 # Copier le reste du projet
 COPY . .
 
-# Vérifier que `node_modules` est bien installé avant de démarrer
-CMD sh -c "if [ ! -d node_modules ]; then npm install; fi && ng serve --host 0.0.0.0 --proxy-config proxy.conf.json"
+# Commande remplacée par docker-compose, donc pas utile ici

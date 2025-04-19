@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AudioUploadComponent } from "./audio-upload.component";
+import {AudioUploadComponent} from './audio-upload.component';
 
-describe("AudioUploadComponent", () => {
+describe('AudioUploadComponent', () => {
   let component: AudioUploadComponent;
   let fixture: ComponentFixture<AudioUploadComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AudioUploadComponent],
+      imports: [AudioUploadComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AudioUploadComponent);
@@ -16,7 +16,7 @@ describe("AudioUploadComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });
