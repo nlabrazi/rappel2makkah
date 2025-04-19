@@ -1,11 +1,11 @@
-import { Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { Router } from "@angular/router";
-import { MatCardModule } from "@angular/material/card";
-import { MatButtonModule } from "@angular/material/button";
-import { MatIconModule } from "@angular/material/icon";
-import { MatListModule } from "@angular/material/list";
-import { MatProgressBarModule } from "@angular/material/progress-bar";
+import {Component} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {Router} from '@angular/router';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatListModule} from '@angular/material/list';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 interface UploadFile {
   file: File;
@@ -17,7 +17,7 @@ interface UploadFile {
 }
 
 @Component({
-  selector: "app-audio-upload",
+  selector: 'app-audio-upload',
   standalone: true,
   imports: [
     CommonModule,
@@ -25,10 +25,10 @@ interface UploadFile {
     MatButtonModule,
     MatIconModule,
     MatListModule,
-    MatProgressBarModule,
+    MatProgressBarModule
   ],
-  templateUrl: "./audio-upload.component.html",
-  styleUrls: ["./audio-upload.component.scss"],
+  templateUrl: './audio-upload.component.html',
+  styleUrls: ['./audio-upload.component.scss']
 })
 export class AudioUploadComponent {
   uploadedFiles: UploadFile[] = [];
@@ -69,11 +69,11 @@ export class AudioUploadComponent {
 
   handleFiles(files: FileList) {
     Array.from(files).forEach((file) => {
-      if (file.type.startsWith("audio/")) {
+      if (file.type.startsWith('audio/')) {
         const uploadFile: UploadFile = {
           file,
           name: file.name,
-          size: file.size,
+          size: file.size
         };
 
         // Créer une URL de prévisualisation
@@ -92,11 +92,11 @@ export class AudioUploadComponent {
   }
 
   formatFileSize(bytes: number): string {
-    if (bytes === 0) return "0 Bytes";
+    if (bytes === 0) return '0 Bytes';
     const k = 1024;
-    const sizes = ["Bytes", "KB", "MB", "GB"];
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
   }
 
   uploadFiles() {
@@ -120,7 +120,7 @@ export class AudioUploadComponent {
     // TODO: Implémenter le véritable upload des fichiers
     setTimeout(() => {
       this.isUploading = false;
-      this.router.navigate(["/admin/dashboard"]);
+      this.router.navigate(['/admin/dashboard']);
     }, 5000);
   }
 
@@ -128,13 +128,13 @@ export class AudioUploadComponent {
     if (this.uploadedFiles.length > 0) {
       if (
         confirm(
-          "Êtes-vous sûr de vouloir annuler ? Les fichiers sélectionnés seront perdus.",
+          'Êtes-vous sûr de vouloir annuler ? Les fichiers sélectionnés seront perdus.'
         )
       ) {
-        this.router.navigate(["/admin/dashboard"]);
+        this.router.navigate(['/admin/dashboard']);
       }
     } else {
-      this.router.navigate(["/admin/dashboard"]);
+      this.router.navigate(['/admin/dashboard']);
     }
   }
 }

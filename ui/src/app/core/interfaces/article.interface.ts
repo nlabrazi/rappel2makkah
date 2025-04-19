@@ -15,4 +15,4 @@ export interface CreateArticleDto {
   audioUrl?: string;
 }
 
-export interface UpdateArticleDto extends Partial<CreateArticleDto> {}
+export type UpdateArticleDto = Partial<CreateArticleDto>;

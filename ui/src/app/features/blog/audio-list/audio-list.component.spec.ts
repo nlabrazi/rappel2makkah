@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AudioListComponent } from "./audio-list.component";
+import {AudioListComponent} from './audio-list.component';
 
-describe("AudioListComponent", () => {
+describe('AudioListComponent', () => {
   let component: AudioListComponent;
   let fixture: ComponentFixture<AudioListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AudioListComponent],
+      imports: [AudioListComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AudioListComponent);
@@ -16,7 +16,7 @@ describe("AudioListComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });
